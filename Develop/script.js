@@ -13,6 +13,7 @@ function writePassword() {
 var symbols = [',', '!',',', '"', ',', '#', '$', '%', '&', '(', ')', '*', '+', ',', '-', '.', '/', ':', ';', '<', '=', '>', '?', '@', '[', ']', '^', '_', '`', '{', '|', '}', '~',"\\"];
 var lower = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
 var upper = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
+var number = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
 
 //sets up an array to store characters depending on choices by the user and an array to store the password
 var pass = [];
@@ -22,11 +23,12 @@ var pass1 = [];
 var caseUpper;
 var caseLower;
 var caseSymb;
+var caseNum;
 
 // Listener to generate button
 generateBtn.addEventListener("click", function(){
 //Asks desired password length and a loop if the user enters an invalid number
-var passwordLength = prompt("How long do you want your password to be? At least 8 characters and no more than 128");
+var passwordLength = prompt("How long do you want your password to be? At least 8 characters and no more than 128.");
 function passLength() {
   if (passwordLength < 8 || passwordLength > 128) {
     passwordLength = prompt("Try again. At least 8 characters and no more than 128 characters.");
@@ -36,9 +38,10 @@ function passLength() {
 
 //Question for the user to customize password characters
 function question(){
-caseUpper = confirm("Would you like upper case letters in your password");
-caseLower = confirm("Would you like lower case letters in your password");
-caseSymb = confirm("Would you like symbols in your password");
+caseUpper = confirm("Would you like upper case letters in your password?");
+caseLower = confirm("Would you like lower case letters in your password?");
+caseNum = confirm("Would you like numbers in your password?");
+caseSymb = confirm("Would you like symbols in your password?");
 }
 
 //Runes the previous functions 
@@ -55,6 +58,9 @@ if (caseLower){
 if (caseSymb){
   pass.push.apply(pass, symbols);
 }
+if (caseNum){
+  pass.push.apply(pass, number);
+}
 
 //Places desired characters into pass1 creating the password of chosen length as an array
 for (i = 0; i < passwordLength; i++){
@@ -62,8 +68,8 @@ for (i = 0; i < passwordLength; i++){
 }
 
 //Checks to make sure at least one set of characters was chosen so a password can be created
-if (pass.length < 25){
-  confirm("Please try again!");
+if (pass.length < 10){
+  confirm("Please try again!  You need to pick at least one set of characters.");
 }
 
 //Runs the function at the top of the page printing the password on the webpage
